@@ -1,45 +1,26 @@
+// Importação de bibliotecas
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import Database from './src/Database/Database';
-import Veiculo from './src/Models/Veiculo';
+// Importação das telas
+import Home from './src/Screens/Home';
+import Listagem from './src/Screens/Listagem';
+import Cadastro from './src/Screens/Cadastro';
+
+// Criação de variáveis auxiliares
+const Stack = createStackNavigator();
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      listaVeiculos: []
-    }
-    this.ListarBanco();
-    //this.CadastrarBanco('Batmóvel', 'HotWheels', 2005, 'https://cf.shopee.com.br/file/dd9bfd306cbaa926a7b23f6d568cd103')
-  }
-
-
-
-  ListarBanco = () => {
-    const banco = new Database();
-    banco.Listar().then( lista => { this.setState({ listaVeiculos: lista }) } )
-  }
-
-  CadastrarBanco = (modelo, marca, ano, imagem) => {
-    const banco = new Database();
-    const veiculo = new Veiculo(modelo, marca, ano, imagem)
-    banco.Inserir(veiculo);
-  }
-
   render() {
     return(
-      <View>
-        <Text>Olá, mundo!</Text>
-
-        {
-          this.state.listaVeiculos.map(
-            item => (
-              <Text>{item.modelo} {item.marca} {item.ano} {item.imagem}</Text>
-            )
-          )
-        }
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Página Inicial" component={Home} />
+          <Stack.Screen name="Listagem" component={Listagem} />
+          <Stack.Screen name="Cadastro" component={Cadastro} />
+        </Stack.Navigator>
+      </NavigationContainer>
     )    
   }
 }
