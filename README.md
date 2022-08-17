@@ -1,4 +1,4 @@
-# Projetos Turma 7159
+# Projetos Turma 7583
 Repositório com códigos desenvolvidos durante as aulas das turmas 7583 e 7669 de IPI.
 
 ## Módulo 4
