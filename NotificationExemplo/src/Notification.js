@@ -2,6 +2,10 @@ import PushNotification from "react-native-push-notification"
 
 class Notification {
 
+    setNavegador = (novoNavegador) => {
+        navegador = novoNavegador
+    }
+
     // Configuração orientada pela documentação do React Native Push Notification
     // Essa configuração garante o funcionamento da biblioteca no Android e no iOS
     configure = () => {
@@ -11,21 +15,8 @@ class Notification {
             },
             onNotification: function (notification) {
                 console.log("[NotificationManager] onNotification:", notification);
-
-                // Função de processamento da notificação 
-                // Chamada quando uma notificação é recebida ou aberta
-                PushNotification.localNotificationSchedule({
-                    //... You can use all the options from localNotifications
-                    id: 2, 
-                    message: "My Notification Message", // (required)
-                    date: new Date(Date.now() + 5 * 1000), // in 60 secs
-                    allowWhileIdle: false, // (optional) set notification to work while on doze, default: false
-        
-                    /* Android Only Properties */
-                    repeatTime: 1, // (optional) Increment of configured repeatType. Check 'Repeating Notifications' section for more info.
-                    repeatType: "minute",
-                    channelId: 'my-channel',
-                });
+                navegador.navigate("Tela " + notification.id)
+                
             },
         })
     }
